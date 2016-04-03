@@ -37,12 +37,16 @@ grad = zeros(size(theta));
 %
 
 
+costFunction = -1/m * ( sum( log( sigmoid(X*theta) ) .* y + log( 1 - sigmoid(X*theta) ) .* (1 - y ) ) );
+J = costFunction + lambda/(2*m) * (sum( theta(2:length(theta),:) .^2 ));
 
 
 
+thetaNew = theta;
+thetaNew(1) = 0;
 
-
-
+% not both theta excluded theta(1)
+grad = 1/m *  (X' * ( sigmoid(X*theta) - y)) + lambda/m * thetaNew;
 
 
 % =============================================================
